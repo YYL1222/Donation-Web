@@ -1,0 +1,111 @@
+<p>view-users works!</p>
+This will be the page for the admins to be able to edit user information such as:
+first name, last name, email, password (this was on document, but I don't think this should be on), role.
+<br>
+<h1>User List</h1>
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Jack" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <!-- Last Name Column -->
+        <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+            <td mat-cell *matCellDef="let row"> {{row.lastname}} </td>
+        </ng-container>
+
+        <!-- First Name Column -->
+        <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+            <td mat-cell *matCellDef="let row"> {{row.firstname}} </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+        </ng-container>
+
+        <!-- Role Amount Column -->
+        <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+            <td mat-cell *matCellDef="let row"> {{row.roles.role_name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>Edit</th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-icon-button (click)="expandRow(row); $event.stopPropagation()">
+                    <mat-icon>edit</mat-icon>
+                  </button>                  
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-icon-button (click)="deleteUser(row)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
+                <div class="example-element-detail" [@detailExpand]="row === expandedUser ? 'expanded' : 'collapsed'">
+                    <div class="example-element-description">
+                        <div class="example-container" [formGroup]="editUserForm">
+                            
+                            <mat-form-field>
+                                <mat-label>First Name</mat-label>
+                                <input matInput formControlName="firstname" value="{{row.firstname}}">
+                            </mat-form-field>
+                            &nbsp;
+                            <mat-form-field>
+                                <mat-label>Last Name</mat-label>
+                                <input matInput formControlName="lastname" value="{{row.lastname}}">
+                            </mat-form-field>
+                            &nbsp;
+                            <mat-form-field>
+                                <mat-label>Email</mat-label>
+                                <input matInput formControlName="email" type="email" value="{{row.email}}">
+                            </mat-form-field>
+                            &nbsp;
+                            <mat-form-field>
+                                <mat-label>Role</mat-label>
+                                <mat-select formControlName="roles">
+                                    <mat-option [value]="{ id: 2, role_name: 'user' }">User</mat-option>
+                                    <mat-option [value]="{ id: 1, role_name: 'admin' }">Admin</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            &nbsp;
+                            <button mat-button (click)="editUser()">Save</button>
+                            &nbsp;
+                            <button mat-button color="warn" (click)="expandRow(row); $event.stopPropagation()">Cancel</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+
+        <!-- Row definition -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row column-hide"
+            [class.example-expanded-row]="row === expandedUser">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page of users"></mat-paginator>
+</div>

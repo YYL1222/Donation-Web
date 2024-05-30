@@ -1,0 +1,49 @@
+<br>
+<h1>Donation List</h1>
+<button mat-stroked-button color="warn" routerLink="new">Add Type</button> <br> <br>
+<router-outlet></router-outlet>
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. General Donation" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+        <!-- image Column -->
+        <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+            <td mat-cell *matCellDef="let row"><app-image [donationType]="row"></app-image></td>
+        </ng-container>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <!-- Donation Column -->
+        <ng-container matColumnDef="donation_type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Donation Type </th>
+            <td mat-cell *matCellDef="let row"> {{row.type_name}} </td>
+        </ng-container>
+
+        <!-- Recurring Column -->
+        <ng-container matColumnDef="donation_recurring">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Recurring? </th>
+            <td mat-cell *matCellDef="let row"> {{row.reoccurrence}} </td>
+        </ng-container>
+
+      
+
+        <!-- Row definition -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row column-hide"
+>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page of users"></mat-paginator>
+
+</div>

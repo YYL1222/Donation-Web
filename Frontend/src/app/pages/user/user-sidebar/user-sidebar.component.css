@@ -1,0 +1,12 @@
+button {
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+  }
+  
+  .label {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: super;
+  }
+  

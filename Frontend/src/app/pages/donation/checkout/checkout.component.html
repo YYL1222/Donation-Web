@@ -1,0 +1,65 @@
+<mat-card style="width:100%;height:900px;min-height: 800px;">
+    <mat-card-title style="text-align: left;">
+        Donation Check Out
+    </mat-card-title>
+    <mat-card-content>
+        <mat-grid-list cols="4" rowHeight="700px">
+            <mat-grid-tile [colspan]="3">
+                <mat-card style="width:100%;height:100%; margin:auto;">
+                    <mat-card-title style="text-align: center;">
+                        <h3>Orders</h3>
+                    </mat-card-title>
+                    <mat-card-content *ngIf="shoppingCart !== undefined && shoppingCart !== null">
+                        <table mat-table [dataSource]="shoppingCart.items" class="mat-elevation-z8" style="text-align: center;">
+                            <!-- -->
+                            <ng-container matColumnDef="Item Description">
+                                <th mat-header-cell *matHeaderCellDef>Donation Type</th>
+                                <td mat-cell *matCellDef="let donation">
+                                    {{donation.donation_types.type_name |uppercase}}
+                                    <app-image [donationType]="donation.donation_types"></app-image>
+                                    
+                                </td>
+                            </ng-container>
+                            <!-- -->
+                            <ng-container matColumnDef="Donation Amount">
+                                <th mat-header-cell *matHeaderCellDef>Donation Amount</th>
+                                <td mat-cell *matCellDef="let donation">
+                                    {{donation.amount|currency}}
+                                </td>
+                            </ng-container>
+                            <!-- -->
+                            <ng-container matColumnDef="Monthly Recurring">
+                                <th mat-header-cell *matHeaderCellDef>Monthly Recurring</th>
+                                <td mat-cell *matCellDef="let donation">
+                                    {{donation.reoccuringDonation}}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Remove From Cart">
+                                <th mat-header-cell *matHeaderCellDef></th>
+                                <td mat-cell *matCellDef="let donation">
+                                    <button type="button" (click)="removeFromCart(donation)" mat-button><mat-icon [ngStyle]="{'color':'red'}">remove_shopping_cart</mat-icon></button>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <button type="button" (click)="emptyCart()" mat-button style="background-color:red;color:white;float:right;">Empty Cart</button>
+                        <button type="button" (click)="updateCart()" mat-button style="background-color:red;color:white;float:right;">UpdateCart</button>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1">
+                <mat-card style="width:100%;height:100%;background-color: bisque;">
+                    <!--Checkout card -->
+                    <mat-card-content>
+                        checkout card
+                        <h2>{{shoppingCart.items.length}} Items In Cart</h2>
+                        <h2>Cart Total: {{shoppingCart.total|currency}}</h2>
+                        <h2>Reoccuring Monthly Charges: {{shoppingCart.monthlyTotal|currency}}</h2>
+                        <button type="button" (click)="proceedToCheckout()" mat-button style="background-color: red;color:white">CHECK OUT</button>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>

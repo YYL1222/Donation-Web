@@ -1,0 +1,21 @@
+<mat-sidenav-container>
+    <mat-card class="mt50">
+        <mat-action-list>
+            <div mat-subheader>Menu</div>
+            
+            <button mat-list-item routerLink="/user">
+                <mat-icon mat-list-icon>home</mat-icon>
+                <div class="label"> Home </div>
+            </button>
+            <button mat-list-item routerLink="/user/donor">
+                <mat-icon mat-list-icon>card_giftcard</mat-icon>
+                <div class="label"> Make a Donation </div>
+            </button>
+            <!-- (click)="logout()" *ngIf="isLoggedIn" -->
+            <button mat-list-item (click)="logout()">
+                <mat-icon mat-list-icon>logout</mat-icon>
+                <div class="label"> Log out </div>
+            </button>
+        </mat-action-list>
+    </mat-card>
+</mat-sidenav-container>

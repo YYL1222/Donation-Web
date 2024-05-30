@@ -1,0 +1,22 @@
+<div class="container modal-container">
+    <button class="close-button" (click)="closeModal()">X</button>
+    <h3>Please fill the form</h3>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" >
+        <mat-form-field>
+            <mat-label>Donation Type Name</mat-label>
+            <input matInput placeholder="Ex. General Donation" name="type_name" ngModel 
+            #fname="ngModel"
+            required #input>
+        </mat-form-field>
+        <br>
+        <input type="file" id="file" name="file" (change)="onFileSelected($event)" accept=".jpg, .jpeg, .png, .pdf" />
+
+        <mat-checkbox class="example-margin" name="reoccurrence"
+        ngModel 
+        #fname="ngModel" >Recurring?</mat-checkbox>
+        <div class="form-group m-3">
+            <button type="submit" mat-flat-button color="warn">Add Type</button>  &nbsp;
+            <button mat-stroked-button color="warn" routerLink="/admin/add-donation">Cancel</button>
+        </div>
+    </form>
+</div>

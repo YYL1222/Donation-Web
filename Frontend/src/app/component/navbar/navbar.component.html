@@ -1,0 +1,22 @@
+
+<mat-toolbar id="navbar" color="warn" style="background-color: rgb(127, 0, 0);color:white">
+    <a
+    routerLink="home"
+    mat-icon-button
+    class="example-icon mr30"
+    aria-label="Example icon-button with menu icon"
+    matTooltip="Go Home"
+  ><mat-icon style="margin-top: 8px;">home</mat-icon>
+  Home
+</a>
+<span class="spacer"></span>
+<a
+    [routerLink]="'/login'"
+    mat-icon-button
+    class="example-icon favorite-icon mr30"
+    matTooltip="Login"
+  >
+    <mat-icon>login</mat-icon>
+  </a>
+  
+</mat-toolbar>

@@ -1,0 +1,30 @@
+<br>
+<mat-card style="width: 950px;margin:auto;">
+    <mat-card-title style="text-align: center;">
+        <h3>LOGIN</h3>
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="login" (ngSubmit)="onSubmit()" ngNativeValidate>
+            <p>
+            <mat-form-field style="width: 450px;">
+                <mat-label>USERNAME</mat-label>
+                <input type="text" matInput formControlName="email" required>
+            </mat-form-field>
+            <mat-form-field style="width:455px;margin-left:5px;">
+                <mat-label>PASSWORD</mat-label>
+                <input type="password" matInput formControlName="password" required>
+            </mat-form-field>
+            </p>
+           
+        
+        <div style="margin-left: 740px;">
+            <button type="submit" mat-button style="background-color: red;color:white">LOGIN</button>&nbsp;
+            <a [routerLink]="'/'"><button  type="button" mat-button style="background-color: red;color:white">GO BACK</button></a>
+        </div>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<br>
+<mat-card style="width: 950px;margin:auto;">
+    
